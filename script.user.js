@@ -1,8 +1,8 @@
 // ==UserScript==
-// @match               https://rep.repubblica.it/*
+// @match               https://*.repubblica.it/*
 // @name                La Repubblica "Rep" Paywall Bypass
 // @namespace           LucciUserJS
-// @version             2.1.1
+// @version             2.2.0
 // @description         Removes the paywall from Rep (rep.repubblica.it) articles.
 // @description:it      Rimuove il paywall su Rep, gli articoli premium di la Repubblica.it.
 // @author              Lucci <gabriele@lucci.xyz>, Andrea Lazzarotto
@@ -42,6 +42,12 @@ const redirect = function() {
     }
 };
 
+const activateBypassOnLocalEditions = function() {
+    document.getElementById("article-body").style.overflow = "visible";
+    document.getElementById("paywall-banner-adblock").style = "";
+    document.getElementById("ph-paywall").style.display = "none";
+};
+
 (function () {
   'use strict';
   redirect()
@@ -56,5 +62,9 @@ const redirect = function() {
     }
     `
   );
+  
+  // Istruction added to manage restrictions on "Rep ED. LOCALI"
+  activateBypassOnLocalEditions()
+
   window.dispatchEvent(new Event('resize'));
 })()
